@@ -19,7 +19,7 @@ It is especially useful when you don’t have access to your original phone numb
 
 ---
 
-🔹 How It Works
+## 🔹 How It Works
 
 1. Login with String Session
 
@@ -74,7 +74,7 @@ You can then use this OTP on the new device to successfully log in.
 
 No SIM required: As long as the string session is valid, you don’t need your original SIM card for OTP.
 
-Automation: OTPs are automatically captured and delivered by the bot.
+Automation: OTPs are automatically captured and delivered by the userbot.
 
 Convenience: Makes account recovery easy if you forget or lose access to your phone number.
 
