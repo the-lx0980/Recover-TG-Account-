@@ -4,8 +4,10 @@
 ### Set Environment Variables
 
 ```API_ID```= api id
+
 ```API_HASH``` api hash
-```SESSION``` 
+
+```SESSION``` old string session (string session of the account you want to log in to) 
 
 ---
 
