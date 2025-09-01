@@ -20,7 +20,14 @@ Userbot = Client(
 
 @Userbot.on_message(filters.command('start'))
 async def start(bot, update):
-    await update.reply("Hello there!\nI Can Recover Your telegram account")
+    await update.reply("""
+When Telegram sends a login code (e.g. Login code: 24763),
+the bot automatically extracts the 5-digit code using regex.
+
+2. The code is stored in memory inside SAVR_LOGIN["code"].
+
+3. You can use /send anytime to get the formatted code (e.g., 2 4 7 6 3).
+    """)
 
 @Userbot.on_message(filters.command("send")) #, prefixes="!"))  # !send likhne par trigger hoga
 async def send_code(bot, update):
