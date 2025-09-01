@@ -1,5 +1,12 @@
 # Recover-TG-Account-
 
+
+### Set Environment Variables
+
+```API_ID```= api id
+```API_HASH``` api hash
+```SESSION``` 
+
 ---
 
 📌 Telegram Userbot with String Session and OTP Forwarding
