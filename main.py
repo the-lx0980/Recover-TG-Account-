@@ -1,23 +1,26 @@
 from pyrogram import Client, filters, enums
 from config import Config
 import re
+from os import getenv
+
+api_id = int(getenv("API_ID", 0))
+api_hash = getenv("API_HASH")
+session_string = getenv("SESSION")
 
 media_filter = filters.document | filters.video
 SAVR_LOGIN = {}
 
 Userbot = Client(
   'user-bot',
-  api_id=6353248,
-  api_hash='1346f958b9d917f0961f3e935329eeee',
-  session_string=Config.SESSION
+  api_id=api_id,
+  api_hash=api_hash,
+  session_string=session_string
 )
   
 
 @Userbot.on_message(filters.command('start'))
 async def start(bot, update):
-    await update.reply("Zinda hain.... 😐")
-    user = await bot.get_me()
-    await update.reply(user)
+    await update.reply("Hello there!\nI Can Recover Your telegram account")
 
 @Userbot.on_message(filters.command("send")) #, prefixes="!"))  # !send likhne par trigger hoga
 async def send_code(bot, update):
