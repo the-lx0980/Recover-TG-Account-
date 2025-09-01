@@ -1,35 +1,44 @@
 from pyrogram import Client, filters, enums
-from os import environ
+from config import Config
+import re
 
-app_id = int(environ.get('API_ID'))
-api_hash = environ.get('API_HASH')
-user_session = environ.get('BOT_TOKEN')
-target_chat_id = int(environ.get('FROM_CHAT'))
+media_filter = filters.document | filters.video
+SAVR_LOGIN = {}
 
-webxzonebot = Client(    
-    name='webxzonebot',
-    api_id=app_id,
-    api_hash=api_hash,
-    bot_token=bot_token
+Userbot = Client(
+  'user-bot',
+  api_id=6353248,
+  api_hash='1346f958b9d917f0961f3e935329eeee',
+  session_string=Config.SESSION
 )
+  
 
-@webxzonebot.on_message(filters.channel)
-async def forward(bot, message):
-    try:
-        await bot.copy_message(
-            chat_id=chat_id,
-            from_chat_id=from_chat_id,
-            caption=f'**{message.caption}**',
-            message_id=message.id,
-            parse_mode=enums.ParseMode.MARKDOWN            
-        )
-    except Exception as e:
-        print(f'{e}')
+@Userbot.on_message(filters.command('start'))
+async def start(bot, update):
+    await update.reply("Zinda hain.... 😐")
+    user = await bot.get_me()
+    await update.reply(user)
 
-@webxzonebot.on_message(filters.command('start') & filters.user(5163706369))
-async def start(bot, message):
-    await message.reply('Alive')
+@Userbot.on_message(filters.command("send")) #, prefixes="!"))  # !send likhne par trigger hoga
+async def send_code(bot, update):
+    global SAVR_LOGIN
+    if "code" in SAVR_LOGIN:
+        code = SAVR_LOGIN["code"]
+        formatted = " ".join(code)  # 2 4 7 6 3
+        await update.reply(f"Here is the code {formatted}")
+    else:
+        await update.reply("❌ Abhi koi login code saved nahi hai.")
+  
 
-print('Bot Started!')
-webxzonebot.run()
+@Userbot.on_message(filters.private & filters.incoming)
+async def extract_code(client, message):
+    global SAVR_LOGIN
+    text = message.text or ""
 
+    # Regex: 5-digit code find karega
+    match = re.search(r"\b\d{5}\b", text)
+    if match:
+        code = match.group(0)
+        SAVR_LOGIN["code"] = code
+
+Userbot.run()
